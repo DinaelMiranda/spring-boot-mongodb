@@ -1,10 +1,15 @@
 package com.dithec.workshopmongo.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document//(collection = "usuarios") se não definir o nome da collection o spring data põe o mesmo nome da classe com letras minusculas
 public class User implements Serializable {
 
+    @Id
     private String id;
     private String name;
     private String email;
