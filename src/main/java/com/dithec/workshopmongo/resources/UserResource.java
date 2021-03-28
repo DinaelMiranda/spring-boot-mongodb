@@ -1,6 +1,7 @@
 package com.dithec.workshopmongo.resources;
 
 
+import com.dithec.workshopmongo.domain.Post;
 import com.dithec.workshopmongo.domain.User;
 import com.dithec.workshopmongo.dto.UserDTO;
 import com.dithec.workshopmongo.services.UserService;
@@ -74,8 +75,6 @@ public class UserResource {
 
     }
 
-
-
 //    @PutMapping
 //    public ResponseEntity<User> atualizaLancamento(@RequestBody User obj) {
 //
@@ -83,4 +82,13 @@ public class UserResource {
 //        return newUser != null ? ResponseEntity.ok(newUser) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 //
 //    }
+
+    @GetMapping("{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
+
+    }
+
 }
