@@ -3,6 +3,7 @@ package com.dithec.workshopmongo.config;
 import com.dithec.workshopmongo.domain.Post;
 import com.dithec.workshopmongo.domain.User;
 import com.dithec.workshopmongo.dto.AuthorDTO;
+import com.dithec.workshopmongo.dto.CommentDTO;
 import com.dithec.workshopmongo.repository.PostRepository;
 import com.dithec.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,16 @@ public class instantiation implements CommandLineRunner {
         //Incluiu os posts
         Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São paulo.Abraçõs", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
+        //Inclui os COmentários
+        CommentDTO comment1 = new CommentDTO("Boa Viagem Mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment2 = new CommentDTO("Aproveite!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+
+        //Inclui os comentários dentros dos posts
+        post1.getComments().addAll(Arrays.asList(comment1, comment2));
+        post2.getComments().addAll(Arrays.asList(comment3));
+
         //Slavou os Posts
         postRepository.saveAll(Arrays.asList(post1, post2));
 
@@ -49,5 +60,8 @@ public class instantiation implements CommandLineRunner {
         maria.getPosts().addAll(Arrays.asList(post1, post2));
         //Salvou os posts no user mario
         userRepository.save(maria);
+
+
+
     }
 }
