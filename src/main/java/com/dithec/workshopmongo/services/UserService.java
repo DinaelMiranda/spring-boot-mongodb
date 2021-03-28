@@ -4,6 +4,7 @@ import com.dithec.workshopmongo.domain.User;
 import com.dithec.workshopmongo.dto.UserDTO;
 import com.dithec.workshopmongo.repository.UserRepository;
 import com.dithec.workshopmongo.services.exception.ObjectNotFoundException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,10 @@ public class UserService {
         return repo.findAll();
     }
 
-        public User findById(String id) {
-            Optional<User> obj = repo.findById(id);
-            return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
-        }
+    public User findById(String id) {
+        Optional<User> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
 
 
     public User insert(User obj) {
@@ -42,5 +43,25 @@ public class UserService {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
+
+    public User update(User obj) {
+        User newObj = findById(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
+
+
+//    public User update(User obj) {
+//
+//        User newObj = findById(obj.getId());
+//        BeanUtils.copyProperties(newObj, obj, "id");
+//        return repo.save(newObj);
+//    }
 
 }

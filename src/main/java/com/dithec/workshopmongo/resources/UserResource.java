@@ -5,6 +5,7 @@ import com.dithec.workshopmongo.domain.User;
 import com.dithec.workshopmongo.dto.UserDTO;
 import com.dithec.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -61,4 +62,25 @@ public class UserResource {
         return ResponseEntity.noContent().build();
 
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<User> Insert(@RequestBody UserDTO objDto, @PathVariable String id) {
+
+        User obj = service.fromDTO(objDto);
+        obj.setId(id);
+        obj = service.update(obj);
+
+        return ResponseEntity.noContent().build();
+
+    }
+
+
+
+//    @PutMapping
+//    public ResponseEntity<User> atualizaLancamento(@RequestBody User obj) {
+//
+//        User newUser = service.update(obj);
+//        return newUser != null ? ResponseEntity.ok(newUser) : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//
+//    }
 }
