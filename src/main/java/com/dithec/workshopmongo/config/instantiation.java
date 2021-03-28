@@ -32,17 +32,22 @@ public class instantiation implements CommandLineRunner {
         userRepository.deleteAll();
         postRepository.deleteAll();
 
+        //Incluiu os Usuários
         User maria = new User(null, "Maria Brown", "maria@gmail.com");
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
-
+        //Salvou os Usuários
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
+        //Incluiu os posts
         Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu Viagem", "Vou viajar para São paulo.Abraçõs", new AuthorDTO(maria));
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
-
-
+        //Slavou os Posts
         postRepository.saveAll(Arrays.asList(post1, post2));
 
+        //Incluiu os posts no Usuário Maria
+        maria.getPosts().addAll(Arrays.asList(post1, post2));
+        //Salvou os posts no user mario
+        userRepository.save(maria);
     }
 }
