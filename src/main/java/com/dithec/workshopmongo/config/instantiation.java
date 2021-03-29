@@ -46,8 +46,8 @@ public class instantiation implements CommandLineRunner {
 
         //Inclui os COmentários
         CommentDTO comment1 = new CommentDTO("Boa Viagem Mano!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
-        CommentDTO comment2 = new CommentDTO("Aproveite!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
-        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment2 = new CommentDTO("Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment3 = new CommentDTO("Tenha um ótimo dia!", sdf.parse("23/03/2018"), new AuthorDTO(alex));
 
         //Inclui os comentários dentros dos posts
         post1.getComments().addAll(Arrays.asList(comment1, comment2));
